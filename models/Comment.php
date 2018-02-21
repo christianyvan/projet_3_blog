@@ -129,7 +129,7 @@ class Comment
 */   
     public function id()
     {
-         return $this->_id;
+        return $this->_id;
     }
 
 /**
@@ -138,7 +138,7 @@ class Comment
  */
     public function name()
     {
-         return $this->_name;
+        return $this->_name;
     }
 
 /**
@@ -147,7 +147,7 @@ class Comment
  */
     public function content()
     {
-         return $this->_content;
+        return $this->_content;
     }
 
 /**
@@ -165,21 +165,25 @@ class Comment
  */
     public function email()
     {
-         return $this->_postId;
+        return $this->_postId;
     }
 
 /**
- * 
- * @return type
+ * Permet de savoir si le commentaire a été vu(seen=1) ou pas(seen=0).
+ * @return type integer
  */
     public function seen()
     {
          return $this->_seen;
     }
-      
+
+/**
+ * Permet de récupérer la date de création du commentaire
+ * @return type date
+ */
     public function date()
     {
-         return $this->_date;
+        return $this->_date;
     }
 }
 
