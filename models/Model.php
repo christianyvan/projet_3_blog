@@ -6,23 +6,28 @@
  * @author Christian
  * di ioirio 
  */
-abstract class Model {
+abstract class Model
+{
     
     private static $_bdd;
     
     // instancie la connexion à la bdd
     private static function setBdd(){
-        try {
+        try 
+        {
              self::$_bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8','root','',
              array(PDO::MYSQL_ATTR_INIT_COMMAND =>'SET NAMES utf8',PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
-        } catch (Exception $ex) {
-            die("Erreur de connexion");
-        }
-        
-        
+        } 
+            catch (Exception $ex) 
+            {
+                die("Erreur de connexion");
+            }
     }
     
-    // récupère la connexion à la bdd
+    /**
+     * 
+     * @return type
+     */
     protected function getBdd(){
         if (self::$_bdd == null) {
             $this->setBdd();
@@ -59,7 +64,5 @@ abstract class Model {
         }
         $req->closeCursor();
         return $listObj;
-       
-        
-     }
+    }
 }
