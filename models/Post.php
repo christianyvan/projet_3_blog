@@ -3,7 +3,7 @@
 
 /**
  * Description of Post
- *
+ *Classe qui réprésente une ligne de la table post sous forme d'objet Post
  * @author Christian
  */
 
@@ -31,7 +31,7 @@ class Post
  * @param array $data tableau associatif correspondant à une ligne de la table
  */        
     public function hydrate(array $data)
-    { // exemple: key=id value=1 setId(1)
+    { 
         foreach ($data as $key => $value)
         {
             $method = 'set'.ucfirst($key);// $key correspond au nom de chaque colonne de la table posts
