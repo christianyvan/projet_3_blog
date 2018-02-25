@@ -2,13 +2,12 @@
 
 /**
  * Description of Model
- *
+ *Classe abstraite qui contient les fonctions communes à tous les managers
  * @author Christian
  * di ioirio 
  */
 abstract class Model
 {
-    
     private static $_bdd;
     
     // instancie la connexion à la bdd
@@ -25,7 +24,8 @@ abstract class Model
     }
     
     /**
-     * 
+     * Fonction qui récupère la connexion à la bdd, si celle ci n'existe pas 
+     * déjà.
      * @return type
      */
     protected function getBdd(){
@@ -57,7 +57,7 @@ abstract class Model
     
     protected function getAll($table,$obj){
         $listObj = [];
-        $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
+        $req = $this->getBdd()->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
         $req->execute();
         while($data = $req->fetch(PDO::FETCH_ASSOC)){
             $listObj[] = new $obj($data);
