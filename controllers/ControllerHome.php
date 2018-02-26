@@ -23,9 +23,9 @@ class ControllerHome
         {
             if (isset($action) && count($action) > 1) 
             {
-                $errors = [];
-                $errors['action']= "L'action n'existe pas ou plus";
-           
+                //$errors = [];
+               // $errors['action']= "L'action n'existe pas ou plus";
+               throw new Exception("La page n'existe pas.");
             } 
             else
             {
