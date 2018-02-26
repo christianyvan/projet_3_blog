@@ -30,8 +30,9 @@ class View {
      * @param type $file    fichier vue à utiliser
      * @param type $data    tableau de tableaux de données passées en paramètre
      *  à la vue
-     * @return type
-     * @throws Exception
+     * @return type         fichier vue à utiliser
+     * @throws Exception    génère une exeption si le fichier vue appelé 
+     * n'existe pas.
      */
     private function generateFile($file,$data){ 
         if (file_exists($file)) {
