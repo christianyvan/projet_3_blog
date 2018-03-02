@@ -1,52 +1,130 @@
 <?php
-
 require_once ('views/View.php');
-
-
 /**
- * Description of ControllerBlog
- * Classe qui récupère les posts en status posted dans la bdd 
- * et les affiches à l'écran sous forme d'extrait
+ * Description of ControllerSettings
+ * Classe qui gère l'ajout ou la suppression d'un modo
  * @author Christian
  */
-
-class ControllerBlog 
-{
-    private $_postManager;
+class ControllerSettings {
+   
+    private $_settingsManager;
     private $_view;
     
+
     public function __construct($action)
     {
+        
         if (isset($action) && count($action) > 1)
         {
-            throw new Exception('Page introuvable');
-        }   else 
-            {
-                $this->posts(); 
-            }
-    }
-   
-    /**
-     * Description of function posts
-     * fonction qui récupère les posts en status posted=1 et les affiche sous 
-     * forme d'extrait. Si la liste des posts est vide, un message est affiché
-     */
-    private function posts()
-    {
-        $this->_postManager = new PostManager();
-        $posts = $this->_postManager->getPosts();
-        if($posts == false)
+            $errors = [];
+            $errors['action']= "L'action n'existe pas ou plus";
+            $this->_view = new View('Error');
+            $this->_view->generate(array('errors' => $errors));
+            
+        } 
+        if(!isset($_SESSION['role']))
         {
             $errors = [];
-            $errors['action']= "Pas de post de disponible pour le moment";
+            $errors['action']= "Désolé , l'accès à cette page est impossible.";
             $this->_view = new View('Error');
             $this->_view->generate(array('errors' => $errors));
         }
-        else
+        
+        if(isset($_SESSION['role']))
         {
-            $this->_view = new View('Blog');
-            $this->_view->generate(array('posts' => $posts));
+            if($_SESSION['role']=='admin')
+            {
+                $this->settings(); 
+            }
+            else
+            {
+                $errors = [];
+                $errors['action']= "Désolé,vous n'avez pas accès à cette page";
+                $this->_view = new View('Error');
+                $this->_view->generate(array('errors' => $errors));
+            }
         }
     }
-}
-
+    
+    
+    /**
+     * Fonction qui reçoit les données d'un formulaire et qui gère l'ajout ou 
+     * la suppression d'un modo(admin ou modo).
+     * Avant cela, la fonction permet également l'affichage de la vue setting si
+     * l'on est admin.
+     * @throws Exception
+     */
+    private function settings()
+    {
+        if(isset($_POST['submit'])|| isset($_POST['submit2']))
+        {
+            try 
+            {
+                $this->_settingsManager = new SettingsManager();   
+                $name = htmlspecialchars(trim($_POST['name'])); 
+                $email = htmlspecialchars(trim($_POST['email']));  
+                $email_again = htmlspecialchars(trim($_POST['email_again']));  
+                $role = htmlspecialchars(trim($_POST['role'])); 
+                       
+                if(empty($name)|| empty($email)|| empty($email_again))
+                {
+                    throw new Exception('Veuillez entrer tout les champs');
+                }
+            
+                if($email != $email_again)
+                {
+                    throw new Exception('Veuillez entrer des emails identiques');
+                }
+                else
+                {
+                    if(isset($_POST['submit']))                       
+                    {
+                        if($this->_settingsManager->emailTaken($email))
+                        {
+                            throw new Exception('Email déjà utilisé');
+                        }
+                        else
+                        {
+                            $this->_settingsManager = new SettingsManager();
+                            $token = $this->_settingsManager->generateToken(30);
+                            $this->_settingsManager->addModo($name, $email,$token,$role);
+                            $modos = $this->_settingsManager->getModos();
+                            $this->_view = new View('Settings');
+                            $this->_view->generate(array('modos' => $modos));
+                        }
+                    }    
+                    
+                    if(isset($_POST['submit2']))                       
+                    {
+                        $this->_settingsManager = new SettingsManager();
+                        $this->_settingsManager->delModo($name, $email,$role);
+                        $modos = $this->_settingsManager->getModos();
+                        $this->_view = new View('Settings');
+                        $this->_view->generate(array('modos' => $modos));
+                    }
+                }                   
+            }
+            catch (Exception $ex) 
+            {
+                $errors = [];
+                $errors['action'] = $ex->getMessage();
+                $this->_view = new View('Error');
+                $this->_view->generate(array('errors' => $errors)); 
+            }
+        }  
+        else
+        {
+            $this->_settingsManager = new SettingsManager();
+            if($_SESSION['role']== 'admin')
+            {
+                $modos = $this->_settingsManager->getModos();
+                $this->_view = new View('Settings');
+                $this->_view->generate(array('modos' => $modos));
+            }
+            else
+            {
+                header("Location:index.php?action=dashboard");
+            }
+        }
+    }
+}       
