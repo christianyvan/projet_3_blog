@@ -65,5 +65,26 @@ class ControllerHome
                 $this->_view->generate(array('posts' => $posts));
             }
     }
+    
+    
+    function getPostPreview($html, $num_chars) {
+    if(strlen($html) <= $num_chars) $preview = $html;
+    else {
+       $preview = '';
+       $dom = $DOMDocument::loadHTML($html); // creates DOCTYPE, <html>, and <body>
+       $dom->removeChild($dom->firstChild); // DOCTYPE
+       /*
+       * If your post is wrapped by a parent element with an id:
+       * $node = $dom->getElementById('id')->firstChild
+       * Otherwise skip <html> and <body> and grab the first element of your post
+       */
+       $node = $dom->firstChild->firstChild->firstChild;
+       while(strlen($preview) <  $num_chars) {
+         $preview .= $dom->saveHTML($node);
+         $node = $node->nextSibling;
+       }
+    }
+    return $preview;
+    }
 }
 
