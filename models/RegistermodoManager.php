@@ -2,8 +2,8 @@
 
 /**
  * Description of RegistermodoManager
- * Classe qui vérifie l'existence d'un modo à valider en attente de validation
- * de son password.
+ * Classe qui vérifie l'existence d'un modo pour lequel il faut enregistrer
+ * son password.
  * @author Christian
  */
 class RegistermodoManager extends Model{
