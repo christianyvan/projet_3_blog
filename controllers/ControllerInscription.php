@@ -2,7 +2,7 @@
 require_once ('views/View.php');
 /**
  * Description of ControllerSettings
- * Classe qui gère l'ajout ou la suppression d'un modo
+ * Classe qui gère l'inscription d'un modo
  * @author Christian
  */
 class ControllerInscription {
