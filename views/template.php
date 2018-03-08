@@ -2,7 +2,7 @@
       
 // On recupere l'URL de la page pour ensuite affecter class = "active" aux liens de nav
 $action = $_SERVER['REQUEST_URI'];
-$action = str_replace("/projets_netbeans/index.php?action=", "",$action);
+$action = str_replace("/projets_3_blog/index.php?action=", "",$action);
  ?>
 
 <!DOCTYPE html>
@@ -70,7 +70,7 @@ $action = str_replace("/projets_netbeans/index.php?action=", "",$action);
                     <br/>
                     <h3 id="h11"><a  href="<?= URL ?>">Bienvenu sur le blog de Jean Forteroche</a></h3>
                 </div>
-                        <p><?= $content ?></p>
+                <p><?= $content ?></p>
             </div>
         </div><!-- /.container -->
         
