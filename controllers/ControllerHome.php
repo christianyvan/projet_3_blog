@@ -9,6 +9,7 @@ require_once ('views/View.php');
 
 class ControllerHome
 {
+    use Controll;
     private $_postManager;
     private $_view;
    
@@ -23,9 +24,7 @@ class ControllerHome
         {
             if (isset($action) && count($action) > 1) 
             {
-                //$errors = [];
-               // $errors['action']= "L'action n'existe pas ou plus";
-               throw new Exception("La page n'existe pas.");
+                $this->controllAction("L'action n'existe pas ou plus");
             } 
             else
             {
@@ -54,11 +53,7 @@ class ControllerHome
         
         if($posts == false)
         {
-            $errors = [];
-            $errors['action']= "Pas d'article à afficher";
-            $this->_view = new View('Error');
-            $this->_view->generate(array('errors' => $errors));
-            
+            $this->controllAction("Pas de post à afficher");            
         }   else
             {
                 $this->_view = new View('Home');
