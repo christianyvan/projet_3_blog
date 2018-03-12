@@ -13,14 +13,12 @@ require_once('controllers/ControllerPost.php');
 
 class ControllerComment extends ControllerPost{
     
+    use Controll;
     public function __construct($action)
     {
-        if (isset($action) && count($action) > 1) 
+            if (isset($action) && count($action) > 1) 
         {
-            $errors = [];
-            $errors['action']= "L'action n'existe pas ou plus";
-            $this->_view = new View('Error');
-            $this->_view->generate(array('errors' => $errors));
+            $this->controllAction("L'action n'existe pas ou plus");
         }   
         else 
         {
@@ -59,7 +57,6 @@ class ControllerComment extends ControllerPost{
     
     {   
         $this->_commentManager = new CommentManager();
-        // sauvegarde du commentaire
         $this->_commentManager->addComment($name,$content,$postId,$email,$seen=0,$date);
     }
   
@@ -102,7 +99,7 @@ class ControllerComment extends ControllerPost{
     
     private function deleteComment()
     {
-        $this->_dashboardManager = new DashboardManager();
+        $this->_commentManager = new CommentManager();
         if(isset($_GET['del']))
         {
             $this->_dashboardManager->delComment($_GET['del']);
