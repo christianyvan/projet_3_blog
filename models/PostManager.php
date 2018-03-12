@@ -74,6 +74,29 @@ class PostManager extends Model
         }
             return $listPost;
     }
+    
+     /**
+ * Fonction qui récupère la liste des posts en statut publié(posted==1)et les 
+ * stocke dans un tableau dans l'ordre décroissant de date, 
+ * chaque ligne est transformé en objet Post.La fonction ne renvoie que 4 posts.
+ * @return $data tableau d'objets Post.
+ */   
+    public function getPostsPostedLimit()
+    {
+        $listPost = [];
+        $db = $this->getBdd();
+        
+        $req = $db->query('SELECT *FROM posts WHERE posted=1 '
+                         .'ORDER BY posts.date DESC '
+                         . 'LIMIT 4');
+      
+        while($row = $req->fetch(PDO::FETCH_ASSOC))
+        {
+           
+            $listPost[]= new Post($row);
+        }
+            return $listPost;
+    }
    
     /**
      * Fonction qui retourn un post sous forme d'objet Post, quelque soit sont 
