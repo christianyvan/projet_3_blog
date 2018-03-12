@@ -1,0 +1,18 @@
+#h41,#h42,#h21,#h22,#h43{
+    margin: auto;
+    text-align: center;
+}
+
+#h11{
+    margin: auto;
+    text-align: center;
+}
+
+#avion1,#avion2{
+	background-image:url('../img/posts/default.jpg');
+	height: 20em;
+}
+
+#sidenav-overlay{
+    z-index:100!important;
+}
