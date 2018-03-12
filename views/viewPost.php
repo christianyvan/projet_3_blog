@@ -23,7 +23,7 @@ et son image. Un formulaire pour ajouter un commentaire est également affiché 
         <?php foreach ($comments as $comment): ?>
             <div class="container">
                 <p><?= $comment->name();?> le <?= date("d/m/Y",strtotime($comment->date()));?> a dit :</p><br>
-                <p><?= nl2br(htmlspecialchars_decode($comment->content()));?></p><br>
+                <p><?= nl2br($comment->content());?></p><br>
                 <hr>
             </div>
         <?php endforeach; ?>
