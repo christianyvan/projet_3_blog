@@ -2,7 +2,7 @@
       
 // On recupere l'URL de la page pour ensuite affecter class = "active" aux liens de nav
 $action = $_SERVER['REQUEST_URI'];
-$action = str_replace("/index.php?action=", "",$action);
+$action = str_replace("/projet_3_blog/index.php?action=", "",$action);
  ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ $action = str_replace("/index.php?action=", "",$action);
          <link type="text/css" rel="stylesheet" href="css/style.css"/>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script type="text/javascript" src="js/script.js"
+        <script type="text/javascript" src="js/script.js"></script>
         
         
         
