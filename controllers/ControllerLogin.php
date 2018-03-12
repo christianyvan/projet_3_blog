@@ -8,6 +8,7 @@ require_once ('views/View.php');
  * @author Christian
  */
 class ControllerLogin {
+    use Controll;
     private $_view;
     private $_loginManager;
     
@@ -17,7 +18,7 @@ class ControllerLogin {
     { 
         if (isset($action) && count($action) > 1) 
         {
-            throw new Exception('Page introuvable');
+            $this->controllAction("L'action n'existe pas ou plus.");
         }  
         else
         {
@@ -80,10 +81,7 @@ class ControllerLogin {
                 }
                 else
                 {
-                    $_SESSION['role']= 'modo';
-                    $_SESSION['admin'] = $email;
-                    $_SESSION['password'] = $password;
-                    header("Location:index.php?action=dashboard"); 
+                    $this->sessionInit('admin', $email, $password);
                 }
             }
             
@@ -103,5 +101,14 @@ class ControllerLogin {
             $this->_view = new View('Login');
             $this->_view->generate(array());
         }
-    }  
+    } 
+    
+    private function sessionInit($role,$email,$password)
+    {
+      $_SESSION['role'] = $role;
+      $_SESSION['amin'] = $admin;
+      $_SESSION['password'] = $password;
+      header("Location:index.php?action=dashboard");
+      
+    }
 }    
