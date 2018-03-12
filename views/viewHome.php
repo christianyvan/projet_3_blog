@@ -1,8 +1,10 @@
 <?php ob_start();?>
-
-<hr>
+<div  class="container black-text"  id="avion2">
+    <h1 class="flow-text">Suivez mon nouveau roman</h1>
+    <h1 class="flow-text btn-large background  blue lighten-1 white-text">Billet simple pour l'Alaska</h1>
+</div>
 <br/><br/>
-
+<hr>
 <div class="container">
     <h3 id="h31">Derniers chapitres publiés</h3>
 </div>
