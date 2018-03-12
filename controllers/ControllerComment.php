@@ -102,7 +102,7 @@ class ControllerComment extends ControllerPost{
         $this->_commentManager = new CommentManager();
         if(isset($_GET['del']))
         {
-            $this->_dashboardManager->delComment($_GET['del']);
+            $this->_commentManager->delComment($_GET['del']);
             header("Location:index.php?action=dashboard");
         }
     }
