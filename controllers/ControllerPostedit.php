@@ -9,6 +9,7 @@
 
 class ControllerPostedit {
    
+    use Controll;
     private $_view;
     private $_postManager;
    
@@ -16,7 +17,7 @@ class ControllerPostedit {
     {
         if (isset($action) && count($action) > 1) 
         {
-            throw new Exception('Page introuvable');
+            $this->controllAction("L'action n'existe pas ou plus.");
         }   else 
             {
                 if(isset($_POST['publish']))
