@@ -49,7 +49,7 @@ class ControllerHome
     private function posts()
     {
         $this->_postManager = new PostManager();
-        $posts = $this->_postManager->getPosts_posted();
+        $posts = $this->_postManager->getPostsPosted();
         
         if($posts == false)
         {
