@@ -12,6 +12,7 @@ require_once ('views/View.php');
 
 class ControllerBlog 
 {
+    use Controll;
     private $_postManager;
     private $_view;
     
@@ -37,10 +38,7 @@ class ControllerBlog
         $posts = $this->_postManager->getPosts();
         if($posts == false)
         {
-            $errors = [];
-            $errors['action']= "Pas de post de disponible pour le moment";
-            $this->_view = new View('Error');
-            $this->_view->generate(array('errors' => $errors));
+            $this->controllAction("Pas de post de disponible pour le moment");
         }
         else
         {
