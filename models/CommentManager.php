@@ -27,14 +27,14 @@ class CommentManager extends Model
         
         if ($req != false)
         {
-       
             return $listComment;
      
-        }   else
-            { 
-                $response = "Pas de commentaire pour cet article ... Soyez le premier";
-                return $response;
-            }
+        } 
+        else
+        { 
+            $response = "Pas de commentaire pour cet article ... Soyez le premier";
+            return $response;
+        }
     }
     
     /**
