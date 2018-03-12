@@ -8,6 +8,7 @@ require_once ('views/View.php');
 
 class ControllerPostadmin 
 {
+    use Controll;
     protected $_postManager;
     protected $_view;
     
@@ -15,15 +16,16 @@ class ControllerPostadmin
     {
         if  (isset($action) && count($action) > 1)
         {
-            throw new Exception('Page introuvable');
-        }   else 
+            $this->controllAction("L'action n'existe pas ou plus.");
+        } 
+        else 
+        {
+            if(isset($_GET['id'])&& isset($_GET['action']))
             {
-                    if(isset($_GET['id'])&& isset($_GET['action']))
-                    {
-                        $id=(int)$_GET['id'];
-                        $this->post($id);
-                    }
+                $id=(int)$_GET['id'];
+                $this->post($id);
             }
+        }
     }
     
     /**
