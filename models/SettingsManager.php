@@ -82,7 +82,7 @@ class SettingsManager extends Model{
                         </head>
                     <body>
                         Voici votre identifiant et code unique à insérer sur
-                        <a href="http://localhost/projet_3_cpm_blog/index.php?action=registermodo" >Créer le mot de passe</a>
+                        <a href="http://blog.christian-yvan.fr/index.php?action=registermodo" >Créer le mot de passe</a>
                         
                         <br/>Identifiant: '.$email.'
                         <br/>Mot de passe: '.$token.'
