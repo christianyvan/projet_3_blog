@@ -22,12 +22,12 @@ class ControllerComment extends ControllerPost{
         }   
         else 
         {
-            if(isset($_GET['action'])&& isset($_POST['submit']))
+            if(isset($_GET['action'])&& isset($_POST['submit'])&& isset($_GET['id']))
             {
-                $name = $_POST['name'];
-                $email = $_POST['email'];
-                $content = $_POST['postComment'];
-                $postId = $_GET['id'];   
+                $name = htmlspecialchars(trim($_POST['name']));
+                $email = htmlspecialchars(trim($_POST['email']));
+                $content = htmlspecialchars(trim($_POST['postComment']));
+                $postId = (int)$_GET['id'];   
                     
                 if($this->controlForm($name,$email,$content,$postId))
                 {
@@ -71,11 +71,6 @@ class ControllerComment extends ControllerPost{
      */
     function controlForm($name,$email,$content,$postId)
     {       
-        $name = htmlspecialchars(trim($name));
-        $email = htmlspecialchars(trim($email));
-        $content = htmlspecialchars(trim($content));
-        $postId = (int)$postId;
-                
         $errors = [];
         if(empty($name)|| empty($email)|| empty($content))
         {
