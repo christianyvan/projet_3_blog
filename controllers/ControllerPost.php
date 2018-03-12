@@ -10,6 +10,7 @@ require_once ('views/View.php');
 
 class ControllerPost 
 {
+    use Controll;
     private $_postManager;
     private $_commentManager;
     private $_view;
@@ -18,14 +19,11 @@ class ControllerPost
     {
         if (isset($action) && count($action) > 1) 
         {
-            $errors = [];
-            $errors['action']= "L'action n'existe pas ou plus";
-            $this->_view = new View('Error');
-            $this->_view->generate(array('errors' => $errors));
+            $this->controllAction("L'action n'existe pas ou plus.");
         }   
         else 
         {
-            if(isset($_GET['id']))
+            if(isset($_GET['id'])&& issset($_GET('action')))
             {
                 $id=(int)$_GET['id'];
                 $this->post($id);
@@ -85,7 +83,7 @@ class ControllerPost
         $this->_postManager->delPost($id);
         $this->_commentManager->delComment($id);
         $posts = $this->_postManager->getAllPosts();
-        $this->_view = new View('listpost');
+        $this->_view = new View('Listpost');
         $this->_view->generate(array('posts' => $posts));
     }
 }
