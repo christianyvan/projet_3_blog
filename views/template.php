@@ -2,7 +2,7 @@
       
 // On recupere l'URL de la page pour ensuite affecter class = "active" aux liens de nav
 $action = $_SERVER['REQUEST_URI'];
-$action = str_replace("/projets_3_blog/index.php?action=", "",$action);
+$action = str_replace("/index.php?action=", "",$action);
  ?>
 
 <!DOCTYPE html>
@@ -20,30 +20,35 @@ $action = str_replace("/projets_3_blog/index.php?action=", "",$action);
          <link type="text/css" rel="stylesheet" href="css/style.css"/>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript" src="js/script.js"
         
         
         
         <title>Mon blog</title>
     </head>
 
-    <body>
+    <body class="background blue lighten-5">
         <div class=" navbar-fixed">     
             <nav class="black container-fluid">
                 <div class="wrapper container">
-                    <a href="index.php?action=home" class="brand-logo">Blog de Jean</a>
+                    <a href="index.php?action=home" class="brand-logo">Blog de Jean Forteroche</a>
                     <a href="#" data-activates="smartphone-menu" class="button-collapse"><i class="material-icons">menu</i></a>
         
                     <ul class="right hide-on-med-and-down" >
-                        <li class="<?php echo($action=="home")?"active":"";?>">
-                            <a class="btn grey" href="index.php?action=home">Accueil</a>
+                        <li>
+                            <a class="<?=($action=="home")?"background grey":"";?>" href="index.php?action=home">Accueil</a>
                         </li>
                         
-                        <li class="<?php echo($action=="blog")?"active":"";?>">
-                            <a class="btn grey"href="index.php?action=blog">Blog</a>
+                        <li >
+                            <a class="<?=($action=="blog")?"background grey":"";?>" href="index.php?action=blog">Blog</a>
                         </li>
                 
-                        <li class="<?php echo($action=="login")?"active":"";?>">
-                            <a  class="btn grey"href="index.php?action=login">Admin</a>
+                        <li>
+                            <a  class="<?=($action=="login")?"background grey":"";?>" href="index.php?action=login">Admin</a>
+                        </li>
+                        
+                        <li>
+                            <a  class="<?=($action=="inscription")?"background grey":"";?>" href="index.php?action=inscription">Inscription</a>
                         </li>
                     </ul>
         
@@ -53,11 +58,15 @@ $action = str_replace("/projets_3_blog/index.php?action=", "",$action);
                         </li>
                         
                         <li class="<?php echo($action=="blog")?"active":"";?>">
-                            <a href="index.php?action=blog">Blog</a>
+                            <a href="index.php?action=blog">Sommaire</a>
                         </li>
                 
                         <li class="<?php echo($action=="login")?"active":"";?>">
-                            <a  href="index.php?action=login">Admin</a>
+                            <a  href="index.php?action=login">Tableau de bord</a>
+                        </li>
+                        
+                        <li class="<?php echo($action=="inscription")?"active":"";?>">
+                            <a  href="index.php?action=inscription">Inscription</a>
                         </li>
                     </ul>
                 </div>
