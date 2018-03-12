@@ -7,17 +7,14 @@
  * @author Christian
  */
 class ControllerDelete {
-   private $_commentManager;
+    use Controll;
+    private $_commentManager;
       
     public function __construct($action)
     {
         if (isset($action) && count($action) > 1) 
         {
-            $errors = [];
-                       $errors['action']= "L'action n'existe pas ou plus";
-                       $this->_view = new View('Error');
-                       $this->_view->generate(array('errors' => $errors));
-            //throw new Exception('Page introuvable');
+            $this->controllAction("L'action n'existe pas ou plus");
         }   else 
             {
                 $this->deleteComment(); 
