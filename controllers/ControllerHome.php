@@ -49,16 +49,24 @@ class ControllerHome
     private function posts()
     {
         $this->_postManager = new PostManager();
-        $posts = $this->_postManager->getPostsPosted();
-        
+        $posts = $this->_postManager->getPostsPostedLimit();
+        foreach ($posts as $post)
+        {
+            
+            $content = nl2br(htmlspecialchars_decode($post->content()));
+            $post->setContent($content);
+        }
+       
         if($posts == false)
         {
-            $this->controllAction("Pas de post à afficher");            
-        }   else
-            {
-                $this->_view = new View('Home');
-                $this->_view->generate(array('posts' => $posts));
-            }
+            $this->controllAction("Pas de post à afficher");
+            
+        }
+        else
+        {
+            $this->_view = new View('Home');
+            $this->_view->generate(array('posts' => $posts));
+        }
     }
  }
 
