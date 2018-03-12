@@ -6,7 +6,7 @@
  * @author Christian
  */
 class ControllerDashboard {
-        
+    use Controll;   
     private $_view;
     private $_commentManager;
     private $_dashboardManager;
@@ -15,19 +15,13 @@ class ControllerDashboard {
     {
         if (isset($action) && count($action) > 1)
         {
-            $errors = [];
-            $errors['action']= "L'action n'existe pas ou plus";
-            $this->_view = new View('Error');
-            $this->_view->generate(array('errors' => $errors));
+            $this->controllAction("L'action n'existe pas ou plus");
             
         } 
         
         if(!isset($_SESSION['role']))
         {
-            $errors = [];
-            $errors['action']= "Désolé,l'accès à cette page est impossible.";
-            $this->_view = new View('Error');
-            $this->_view->generate(array('errors' => $errors));
+            $this->controllAction("   Désolé, l'accès à cette page n'est pas autorisé.");
         }
         
         if(isset($_SESSION['role']))
@@ -38,10 +32,7 @@ class ControllerDashboard {
             }
             else
             {
-                $errors = [];
-                $errors['action']= "Désolé,vous n'a";
-                $this->_view = new View('Error');
-                $this->_view->generate(array('errors' => $errors));
+                $this->controllAction("   Désolé, l'accès à cette page n'est pas autorisé.");
             }
         }
     }
