@@ -21,7 +21,12 @@
                 <textarea name="content" class="textarea" ><?= $post->content();?></textarea>
                 <label for="content">Contenu de l'article</label>
             </div>
-        
+            <div class="input-field btn"> 
+                <span>Modifier l'image</span>
+                <input type="file" name="image" >
+            </div>
+                <input type="text" class="file-path col s9" readonly>
+            
             <div class="col s6">
                 <p>Public</p>
                 <div class="switch">
