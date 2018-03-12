@@ -64,11 +64,7 @@ class ControllerLogin {
                 }
                 else
                 {
-                    $_SESSION['role']= 'admin';
-                    $_SESSION['admin'] = $email;
-                    $_SESSION['password'] = $password;
-                    header("Location:index.php?action=dashboard"); 
-                    
+                    $this->sessionInit('admin', $email, $password);                    
                 }
             }   
                      
@@ -81,7 +77,7 @@ class ControllerLogin {
                 }
                 else
                 {
-                    $this->sessionInit('admin', $email, $password);
+                    $this->sessionInit('modo', $email, $password);
                 }
             }
             
