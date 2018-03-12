@@ -40,7 +40,8 @@ class ControllerDashboard {
     /**
      * Fonction qui gère l'affichage du tableau de bord, la valeur de 
      * $modo['modo'] permet la désactivation des icones "valider" et "supprimer"
-     *  à coté des commentaires.
+     *  à coté des commentaires. (ne sera pas utilisé pour donner la possibilité
+     * au modo de validé ou supprimer les commentaires d'un post.
      */
     protected function afficheDashboard()
     {
