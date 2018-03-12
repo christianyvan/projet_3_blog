@@ -11,36 +11,42 @@ abstract class Model
     private static $_bdd;
     
     // instancie la connexion à la bdd
-    private static function setBdd(){
+    private static function setBdd()
+{
         try 
         {
              self::$_bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8','root','',
              array(PDO::MYSQL_ATTR_INIT_COMMAND =>'SET NAMES utf8',PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
         } 
-            catch (Exception $ex) 
-            {
-                die("Erreur de connexion");
-            }
-    }
+        catch (Exception $ex) 
+        {
+            die("Erreur de connexion");
+        }
+}
     
     /**
      * Fonction qui récupère la connexion à la bdd, si celle ci n'existe pas 
      * déjà.
      * @return type
      */
-    protected function getBdd(){
-        if (self::$_bdd == null) {
+    protected function getBdd()
+    {
+        if (self::$_bdd == null)
+        {
             $this->setBdd();
         }
         return self::$_bdd;
     }
     
     // fonction générique permettant d'exécuter un requête, éventuellement paramétrés
-    protected function executeRequest($sql,$params = null){
-        if($params == null){
+    protected function executeRequest($sql,$params = null)
+    {
+        if($params == null)
+        {
             $result = $this->getBdd()->query($sql); // pas de paramêtre , l'exécution n'est pas préparé
         }
-        else{
+        else
+        {
             $result = $this->getBdd()->prepare($sql); // requête préparé
             $result->execute($params);
         }
@@ -55,11 +61,13 @@ abstract class Model
      * @return \obj $var est un tableau d'objet de type $obj
      */
     
-    protected function getAll($table,$obj){
+    protected function getAll($table,$obj)
+    {
         $listObj = [];
         $req = $this->getBdd()->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
         $req->execute();
-        while($data = $req->fetch(PDO::FETCH_ASSOC)){
+        while($data = $req->fetch(PDO::FETCH_ASSOC))
+        {
             $listObj[] = new $obj($data);
         }
         $req->closeCursor();
